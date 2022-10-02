@@ -17,7 +17,7 @@
 #login .container #login-row #login-column #login-box {
   margin-top: 120px;
   max-width: 600px;
-  height: 320px;
+  height: 500px;
   border: 1px solid #9C9C9C;
   background-color: #EAEAEA;
 }
@@ -31,6 +31,8 @@
 </head>
 
 <body>
+
+    {{$errors}}
     <div id="login">
         <h3 class="text-center text-white pt-5">Register form</h3>
         <div class="container">
@@ -41,12 +43,14 @@
                             @csrf
                             <h3 class="text-center text-info">Register</h3>
                             <div class="form-group">
-                                <label for="text" class="text-info">Fullname:</label><br>
+                                <label for="text" class=" text-info">Fullname:</label><br>
                                 <input type="text" name="name" id="username" class="form-control">
-                            </div>
+                             </div>
+
                             <div class="form-group">
                                 <label for="email" class="text-info">Email:</label><br>
                                 <input type="text" name="email" id="username" class="form-control">
+     
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-info">Password:</label><br>

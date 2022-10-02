@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-
+use Illuminate\Console\View\Components\Error;
+use App\Http\Requests\RequestLogin;
 class RegisterController extends Controller
 {
     //
@@ -17,7 +18,6 @@ class RegisterController extends Controller
     {
         return view('register');
     }
-
     public function registerAPI(Request $request)
     {
         $validator =Validator::make($request->all(),[
@@ -25,15 +25,18 @@ class RegisterController extends Controller
             'email' =>'required|string|email|unique:users',
             'password' =>'required|string|confirmed|min:6'
         ]);
+        // if($validator->fails()){
+        //      return response()
+        //      ->withErrors($validator, 'register')
+        //      ->withInput();
 
-        if($validator->fails()){
-             return response()->json($validator->errors()->toJson(),400);
-             return view('home');
-        }
+        // }
         $user=User::create(array_merge(
             $validator->validated(),
             ['password'=>bcrypt($request->password)]
         ));
+
+        
             return redirect()->route('login');
     }
 
@@ -48,12 +51,12 @@ class RegisterController extends Controller
             'password' =>'required|string|min:6'
         ]);
 
-        if($validator->fails()){
-             return response()->json($validator->error(),422);
-        }
-        if(!$token=auth()->attempt($validator->validated())){
-            return  response()->json(['error' =>'Unauthorized'],401);
-        }
+        // if($validator->fails()){
+        //      return response()->json($validator->error(),422);
+        // }
+        // if(!$token=auth()->attempt($validator->validated())){
+        //     return  response()->json(['error' =>'Unauthorized'],401);
+        // }
         return view('welcome');
 
     }
