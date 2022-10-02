@@ -32,7 +32,6 @@
 
 <body>
 
-    {{$errors}}
     <div id="login">
         <h3 class="text-center text-white pt-5">Register form</h3>
         <div class="container">
@@ -45,7 +44,10 @@
                             <div class="form-group">
                                 <label for="text" class=" text-info">Fullname:</label><br>
                                 <input type="text" name="name" id="username" class="form-control">
-                             </div>
+                                {{-- @error('name')
+                                <span style="color: red">{{$message}}</span>
+                            @enderror --}}
+                            </div>
 
                             <div class="form-group">
                                 <label for="email" class="text-info">Email:</label><br>
